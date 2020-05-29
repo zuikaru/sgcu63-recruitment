@@ -1,4 +1,4 @@
-# SGCU63 front-end/back-end engineer recruitment
+# SGCU63 Front-end/Back-end Engineer Recruitment
 
 To all SGCU front-end/back-end engineer candidates, <br />
-Please read and follow instructions specified in the `ISD SGCU63 Software Engineer examination.pdf`.
+please read and follow the instructions in `ISD SGCU63 Software Engineer examination.pdf`.
