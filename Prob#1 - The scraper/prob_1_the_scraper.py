@@ -108,7 +108,27 @@ def write_table_html(baans: list):
 
 
 def main():
-    pass
+    # Get baan list (url and size)
+    print('Getting baan list from the web')
+    baan_url_list = get_baan_list()
+    # Get information for each baan
+    print('Querying info for each baan')
+    baan_list = {'S': [], 'M': [], 'L': [], 'XL': []}
+    for baan in baan_url_list:
+        print(' ', f"url: /baan/{baan['nameURL']}, size: {baan['size']} ")
+        # Get baan info for this baan from the web
+        baan_info = get_baan_info(baan['nameURL'])
+        print(' ', 'Query completed!')
+        # push according to size of baan
+        baan_list[baan['size'].upper()].append(baan_info)
+    # flatten baan_list
+    flattened_baan_list = []
+    for size in ('S', 'M', 'L', 'XL'):
+        flattened_baan_list.extend(baan_list[size])
+    # Write to table.html
+    print('Writing to table.html')
+    write_table_html(flattened_baan_list)
+    print('Writing completed!')
 
 
 if __name__ == '__main__':
