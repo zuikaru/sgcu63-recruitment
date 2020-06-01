@@ -192,7 +192,14 @@ class DigitsDisplay:
 
 
 def main():
-    pass
+    # input
+    number, m1, m2 = input().strip().split()
+    m1 = int(m1)
+    m2 = int(m2)
+    # create display
+    display = DigitsDisplay(number, m1, m2)
+    # print
+    print(display)
 
 
 if __name__ == '__main__':
