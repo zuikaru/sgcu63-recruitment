@@ -109,6 +109,49 @@ class Digit(PixelArray):
         self.digit = int(digit)
         self.mag_vert = mag_vert
         self.mag_horiz = mag_horiz
+        # render
+        self.render()
+
+    def render(self):
+        """ Render a digit onto pixel array """
+        for location in self._DIGIT_CONFIG[self.digit]:
+            self._draw_line_segment(location)
+
+    def _draw_line_segment(self, location: str):
+        """ Draw a line in different location on the display
+
+        Args:
+            location (str): a string of location
+        """
+        # Horizontal line
+        if location == 'top' or location == 'mid' or location == 'bot':
+            # determine starting row position
+            if location == 'top': 
+                row = 0
+            elif location == 'mid': 
+                row = self.mag_vert*2
+            elif location == 'bot': 
+                row = self.mag_vert*4
+            # draw according to magification ratio
+            for offset in range(self.mag_vert):
+                self.line(row + offset, 0, self.width,
+                          PixelArray.DIR_RIGHT, self.digit)
+        # Vertical line
+        elif location == 'top_left' or location == 'top_right' or location == 'bot_left' or location == 'bot_right':
+            # determine starting col position
+            if location == 'top_left' or location == 'bot_left': 
+                col = 0
+            elif location == 'top_right' or location == 'bot_right': 
+                col = self.mag_horiz*4
+            # determine starting row position
+            if location == 'top_left' or location == 'top_right': 
+                row = 0
+            elif location == 'bot_left' or location == 'bot_right': 
+                row = self.mag_vert*2
+            # draw according to magification ratio
+            for offset in range(self.mag_horiz):
+                self.line(row, col + offset, self.mag_vert*3,
+                          PixelArray.DIR_DOWN, self.digit)
 
 
 def main():
