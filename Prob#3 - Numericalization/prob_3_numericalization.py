@@ -82,6 +82,34 @@ class PixelArray:
         return result
 
 
+class Digit(PixelArray):
+    """ Represent digit display (like seven segment display) in pixel array """
+    _DIGIT_CONFIG = {
+        0: {'top', 'bot', 'top_left', 'top_right', 'bot_left', 'bot_right'},
+        1: {'top_right', 'bot_right'},
+        2: {'top', 'mid', 'bot', 'top_right', 'bot_left'},
+        3: {'top', 'mid', 'bot', 'top_right', 'bot_right'},
+        4: {'mid', 'top_left', 'top_right', 'bot_right'},
+        5: {'top', 'mid', 'bot', 'top_left', 'bot_right'},
+        6: {'top', 'mid', 'bot', 'top_left', 'bot_left', 'bot_right'},
+        7: {'top', 'top_right', 'bot_right'},
+        8: {'top', 'mid', 'bot', 'top_left', 'top_right', 'bot_left', 'bot_right'},
+        9: {'top', 'mid', 'bot', 'top_left', 'top_right', 'bot_right'}
+    }  # Contains instruction how to draw a line for each digit
+
+    def __init__(self, digit: int | str, mag_vert: int = 1, mag_horiz: int = 1):
+        """ Initialize digit display
+        Args:
+            digit (int|str): single number
+            mag_vert (int): vertical magification ratio 
+            mag_horiz (int): horizontal magification ratio 
+        """
+        super().__init__(5*mag_horiz, 5*mag_vert, ' ')
+        self.digit = digit
+        self.mag_vert = mag_vert
+        self.mag_horiz = mag_horiz
+
+
 def main():
     pass
 
