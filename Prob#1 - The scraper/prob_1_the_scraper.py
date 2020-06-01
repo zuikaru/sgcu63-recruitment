@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import esprima
+import re
 
 RUBNONGKAOMAI_BASE_URL = 'https://rubnongkaomai.com'  # home page location
 
@@ -72,6 +73,25 @@ def get_baan_list() -> list:
                 continue
         idx += 1
     return all_bann
+
+
+def get_baan_info(baan: str) -> dict:
+    """ Get baan information
+    Returns:
+        dictionary contains baan name and baan slogan in Thai language4
+    """
+    # Get baan page
+    baan_page_response = requests.get(RUBNONGKAOMAI_BASE_URL + '/baan/' + baan)
+    # parse html
+    baan_page_soup = BeautifulSoup(baan_page_response.text, 'html.parser')
+    # get baan info text wrapper component
+    baan_info_text_wrapper = baan_page_soup.find(
+        'div', {'class': re.compile('baan-info-module--text-wrapper.*')})
+    # name
+    baan_name = baan_info_text_wrapper.find('h1', {'type': 'header'}).text
+    # slogan
+    baan_slogan = baan_info_text_wrapper.find('h3', {'type': 'header'}).text
+    return {'name': baan_name, 'slogan': baan_slogan}
 
 
 def main():
