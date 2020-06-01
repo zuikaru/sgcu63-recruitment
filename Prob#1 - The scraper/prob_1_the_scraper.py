@@ -89,9 +89,11 @@ def get_baan_info(baan: str) -> dict:
     baan_info_text_wrapper = baan_page_soup.find(
         'div', {'class': re.compile('baan-info-module--text-wrapper.*')})
     # name
-    baan_name = baan_info_text_wrapper.find('h1', {'type': 'header'}).text
+    baan_name = baan_info_text_wrapper.find(
+        'h1', {'type': 'header'}).decode_contents()
     # slogan
-    baan_slogan = baan_info_text_wrapper.find('h3', {'type': 'header'}).text
+    baan_slogan = baan_info_text_wrapper.find(
+        'h3', {'type': 'header'}).decode_contents()
     return {'name': baan_name, 'slogan': baan_slogan}
 
 
