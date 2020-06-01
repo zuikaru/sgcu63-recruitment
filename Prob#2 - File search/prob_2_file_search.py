@@ -58,7 +58,10 @@ def fileSearch(fileToSearch: str, filesObj: str) -> List[str]:
 
 
 def main():
-    pass
+    path_to_json = input("Path to JSON: ")
+    file_to_search = input("File to search: ")
+    with open(path_to_json) as f: files_obj = f.read()
+    print(fileSearch(file_to_search, files_obj))
 
 if __name__ == '__main__':
     main()
