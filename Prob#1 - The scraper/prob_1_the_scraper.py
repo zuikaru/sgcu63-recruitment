@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import esprima
 import re
+from jinja2 import Template
 
 RUBNONGKAOMAI_BASE_URL = 'https://rubnongkaomai.com'  # home page location
 
@@ -92,6 +93,18 @@ def get_baan_info(baan: str) -> dict:
     # slogan
     baan_slogan = baan_info_text_wrapper.find('h3', {'type': 'header'}).text
     return {'name': baan_name, 'slogan': baan_slogan}
+
+
+def write_table_html(baans: list):
+    """ Generate table.html file from given list of baan """
+    # read template file
+    with open('data/table_template.jinja2', encoding='utf8') as tpl_file:
+        template = Template(tpl_file.read())
+    # render
+    result = template.render(baan_list=baans)
+    # write to table.html
+    with open('table.html', 'w', encoding='utf8') as table_file:
+        table_file.write(result)
 
 
 def main():
