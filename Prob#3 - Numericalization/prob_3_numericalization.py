@@ -154,6 +154,43 @@ class Digit(PixelArray):
                           PixelArray.DIR_DOWN, self.digit)
 
 
+class DigitsDisplay:
+    """ Represent a display that contains an array of digits """
+
+    def __init__(self, digits: Union[int, str], mag_vert: int = 1, mag_horiz: int = 1):
+        """ DigitsDisplay constuctor
+        Args:
+            digit (Union[int,str]): an integer number, can be either int or string
+            mag_vert (int): vertical magification ratio
+            mag_horiz (int): horizontal magification ratio 
+        """
+        self.digits = []
+        self.mag_vert = mag_vert
+        self.mag_horiz = mag_horiz
+        # for each digit
+        for digit in str(digits):
+            # add new instance of Digit to the list
+            digit_obj = Digit(digit, self.mag_vert, self.mag_horiz)
+            self.digits.append(digit_obj)
+
+    def __str__(self):
+        """ Render each digit and merge together """
+        result = [str() for i in range(5*self.mag_vert)]
+        # each Digit object
+        for digit_obj in self.digits:
+            # get 2d pixel array
+            pixel_array = digit_obj.get_array()
+            # for each pixel row
+            for idx, pixel_row in enumerate(pixel_array):
+                # each column
+                for pixel in pixel_row:
+                    result[idx] += str(pixel)
+                # finish with padding
+                result[idx] += ' '*self.mag_horiz
+        # join each row
+        return '\n'.join(result)
+
+
 def main():
     pass
 
