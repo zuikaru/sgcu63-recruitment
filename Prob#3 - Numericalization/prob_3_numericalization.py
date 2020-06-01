@@ -1,5 +1,6 @@
 from typing import Tuple
 from typing import List
+from typing import Union
 import math
 
 
@@ -97,15 +98,15 @@ class Digit(PixelArray):
         9: {'top', 'mid', 'bot', 'top_left', 'top_right', 'bot_right'}
     }  # Contains instruction how to draw a line for each digit
 
-    def __init__(self, digit: int | str, mag_vert: int = 1, mag_horiz: int = 1):
+    def __init__(self, digit: Union[int,str], mag_vert: int = 1, mag_horiz: int = 1):
         """ Initialize digit display
         Args:
-            digit (int|str): single number
+            digit (Union[int,str]): single number
             mag_vert (int): vertical magification ratio 
             mag_horiz (int): horizontal magification ratio 
         """
         super().__init__(5*mag_horiz, 5*mag_vert, ' ')
-        self.digit = digit
+        self.digit = int(digit)
         self.mag_vert = mag_vert
         self.mag_horiz = mag_horiz
 
