@@ -98,7 +98,7 @@ class Digit(PixelArray):
         9: {'top', 'mid', 'bot', 'top_left', 'top_right', 'bot_right'}
     }  # Contains instruction how to draw a line for each digit
 
-    def __init__(self, digit: Union[int,str], mag_vert: int = 1, mag_horiz: int = 1):
+    def __init__(self, digit: Union[int, str], mag_vert: int = 1, mag_horiz: int = 1):
         """ Initialize digit display
         Args:
             digit (Union[int,str]): single number
@@ -126,11 +126,11 @@ class Digit(PixelArray):
         # Horizontal line
         if location == 'top' or location == 'mid' or location == 'bot':
             # determine starting row position
-            if location == 'top': 
+            if location == 'top':
                 row = 0
-            elif location == 'mid': 
+            elif location == 'mid':
                 row = self.mag_vert*2
-            elif location == 'bot': 
+            elif location == 'bot':
                 row = self.mag_vert*4
             # draw according to magification ratio
             for offset in range(self.mag_vert):
@@ -139,14 +139,14 @@ class Digit(PixelArray):
         # Vertical line
         elif location == 'top_left' or location == 'top_right' or location == 'bot_left' or location == 'bot_right':
             # determine starting col position
-            if location == 'top_left' or location == 'bot_left': 
+            if location == 'top_left' or location == 'bot_left':
                 col = 0
-            elif location == 'top_right' or location == 'bot_right': 
+            elif location == 'top_right' or location == 'bot_right':
                 col = self.mag_horiz*4
             # determine starting row position
-            if location == 'top_left' or location == 'top_right': 
+            if location == 'top_left' or location == 'top_right':
                 row = 0
-            elif location == 'bot_left' or location == 'bot_right': 
+            elif location == 'bot_left' or location == 'bot_right':
                 row = self.mag_vert*2
             # draw according to magification ratio
             for offset in range(self.mag_horiz):
