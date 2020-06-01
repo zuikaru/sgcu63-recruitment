@@ -39,13 +39,13 @@ def get_baan_list() -> list:
     idx = 0
     # for each token
     while idx < len(tokens):
-        # begin collecting string if we found allBaanJson
+        # begin collecting data if we found allBaanJson
         if (tokens[idx].value == 'allBaanJson' and tokens[idx].type == 'Identifier' and
                 tokens[idx + 1].type == 'Punctuator' and tokens[idx + 1].value == ':'):
             collecting = True
             idx += 2  # skip head 2 tokens
             continue
-        # end collecting string if we found allFile
+        # end collecting data if we found allFile
         if (tokens[idx].value == 'allFile' and tokens[idx].type == 'Identifier' and
                 tokens[idx + 1].type == 'Punctuator' and tokens[idx + 1].value == ':'):
             collecting = False
